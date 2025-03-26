@@ -32,7 +32,6 @@ function ResultsDisplay({ estimationData }) {
   
   });
 
-  const testEIAAPI = async () => { ... };
 
   return (
     <Box sx={{ maxWidth: 600, margin: 'auto', mt: 4 }}>

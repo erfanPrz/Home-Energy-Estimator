@@ -1,79 +1,55 @@
 # Home Energy Estimator
 
-A web application that estimates house size, number of windows, and energy usage based on postal code or address input.
+A web application that estimates home energy usage based on address and property information. The application uses OpenStreetMap for address validation and EIA (Energy Information Administration) API for energy consumption data.
 
 ## Features
 
-- Input postal code or full address
-- Get estimates for:
-  - House size (square feet)
-  - Number of windows
-  - Monthly energy usage (kWh)
-- Clean, modern UI with Material-UI components
-- Mobile-responsive design
-- Form validation and error handling
+- Address validation using OpenStreetMap API
+- Real-time energy consumption data from EIA API
+- Property size estimation based on location type
+- Window count estimation
+- Monthly energy usage calculation
+- Responsive design with Material-UI
+- Interactive energy meters and visualizations
 
-## Tech Stack
-
-- React.js
-- Material-UI (MUI)
-- React Hook Form
-- Axios (for API calls)
-
-## Getting Started
-
-### Prerequisites
+## Prerequisites
 
 - Node.js (v14 or higher)
-- npm or yarn
+- npm (v6 or higher)
+- EIA API key (get it from [EIA Open Data](https://www.eia.gov/opendata/))
 
-### Installation
-
-1. Clone the repository:
-```bash
-git clone [your-repo-url]
-cd home-energy-estimator
-```
-
-2. Install dependencies:
-```bash
-npm install
-```
-
-3. Start the development server:
-```bash
-npm start
-```
-
-The application will open in your default browser at `http://localhost:3000`.
 
 ## API Integration
 
-Currently, the application uses mock data for demonstration purposes. To integrate with real APIs:
+### OpenStreetMap API
+- Used for address validation and geocoding
+- No API key required
+- Rate limiting: 1 request per second
 
-1. Google Maps API for address validation and geocoding
-2. Real estate data APIs for house size estimation
-3. Energy usage data APIs for consumption estimates
+### EIA API
+- Used for energy consumption data
+- Requires API key
+- Provides monthly energy consumption data
+- Residential portion estimated at 20% of total consumption
 
-## Limitations and Assumptions
+## Estimation Methods
 
-- Current implementation uses mock data
-- House size estimates are based on neighborhood averages
-- Window count is estimated based on typical house sizes
-- Energy usage is approximated based on similar properties
+### House Size
+- Base sizes by property type:
+  - House/Residential: 2000 sq ft
+  - Apartment: 1000 sq ft
+  - Condo: 1200 sq ft
+  - Default: 1800 sq ft
+- Adjustments for multi-family dwellings and high-rise buildings
 
-## Next Steps
+### Windows
+- Window-to-floor-area ratio by property type:
+  - House/Residential: 1.5 windows per 100 sq ft
+  - Apartment/Condo: 1 window per 100 sq ft
+  - Default: 1.2 windows per 100 sq ft
 
-1. Integrate with real APIs for accurate data
-2. Add more detailed property information
-3. Implement user authentication
-4. Add historical energy usage trends
-5. Include energy-saving recommendations
+### Energy Usage
+- Real data from EIA API when available
+- Fallback estimation: 0.5 kWh per sq ft
+- Maximum energy usage: 2000 kWh
 
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
